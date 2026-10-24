@@ -1,7 +1,7 @@
 # finalProject2026
 ## Group Names:
-Kassandra Meza
-Consuelo Rodriguez
+Kassandra Meza  
+Consuelo Rodriguez  
 Melanie Trevino
 
 ## Description:

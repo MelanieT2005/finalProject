@@ -1,4 +1,9 @@
 # finalProject2026
+## Group Names:
+Kassandra Meza
+Consuelo Rodriguez
+Melanie Trevino
+
 ## Description:
 This project is a social music review platform designed for music listeners to rate, review, discover, and share their opinions about songs and albums. The application will allow users to create profiles, keep track of music they have listened to, and interact with other users. 
 

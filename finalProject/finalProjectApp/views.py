@@ -23,7 +23,16 @@ def edit_profile(request, username):
 
     if request.method == 'POST':
         profile.bio = request.POST.get('bio', '')
+
+        if request.POST.get('remove_picture') == 'on':
+            profile.profile_picture.delete(save=False)
+            profile.profile_picture = None
+
+        elif 'profile_picture' in request.FILES:
+            profile.profile_picture = request.FILES['profile_picture']
+
         profile.save()
+
         return redirect('profile', username=username)
 
     return render(request, 'finalProjectApp/edit_profile.html', {'profile': profile})

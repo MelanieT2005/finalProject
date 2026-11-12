@@ -33,3 +33,6 @@ As a music listener, I want to follow users whose musical interests are similar 
 
 As a user, I want to personalize my profile with a bio and profile picture so that other users can learn more about me and my musical interests and preferences.
 
+## Prototype Link
+https://www.figma.com/proto/SBpmscT7xzszeuEjVhsIhL/Music-Prototype?node-id=114-2&p=f&t=YS6xROqaBDgZerFu-1&scaling=contain&content-scaling=fixed&page-id=2%3A3
+

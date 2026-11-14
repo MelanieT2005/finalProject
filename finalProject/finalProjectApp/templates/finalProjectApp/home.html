@@ -1,0 +1,225 @@
+﻿{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title></title>
+
+    <style>
+        body{
+
+            background-color: #000000;
+            color: white;
+            font-family: Arial, sans-serif;
+
+        }
+
+        .custom-navbar{
+
+            background-color: #272727;
+        }
+
+        .navbar-search{
+            width: 40%;
+
+        }
+
+        .navbar-dark .navbar-nav .nav-link:hover{
+
+            color: #9cd8ff;
+
+        }
+
+        .btn-outline{
+            color: #9cd8ff;
+            border-color: #9cd8ff;
+            white-space: nowrap;
+        }
+
+        .btn-outline:hover{
+            background-color: #9cd8ff;
+            border-color: #9cd8ff;
+            color:#171b22;
+        }
+
+        .welcome-card{
+            background-color: black;
+            color: white;
+            width: 80rem;
+            height: 20rem;
+            border-color: #9cd8ff;
+            border-radius: 15px;
+            max-width: 700px;
+            max-height: 650px;
+
+            box-shadow:
+                0 0 15px rgba(156, 216, 225, .35),
+                0 0 35px rgba(156, 216, 225, .25),
+                0 0 65px rgba(156, 216, 225, .15) !important;
+        }
+
+        .albums-group .card{
+            background-color: black;
+
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+        <div class="container-fluid">
+
+            <!--Site Name-->
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Middle Search & Button-->
+            <form class="d-flex navbar-search position-absolute start-50 translate-middle-x">
+                <input class="form-control me-2 rounded-pill" type="search" placeholder="Search Music..." aria-label="Search">
+                <button class="btn btn-outline" type="submit">Search</button>
+            </form>
+
+            <!--Rightside Links-->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Discover</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Reviews</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                    </li>
+
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Login</a>
+                    </li>
+
+                    {% endif %}
+
+                </ul>
+
+                {% if user.is_authenticated %}
+                    <button class="btn btn-outline ms-2" type="button">Logout</button>
+                {% else %}
+                    <button class="btn btn-outline ms-2" type="button">Sign Up</button>
+                {% endif %}
+
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!--Left Side Screen-->
+            <div class="col-6">
+
+                <!--Welcome Card-->
+                <div class="card welcome-card me-auto shadow-lg mt-4 ms-3">
+                    <div class="card-body">
+                        
+                        <!--If Logged In-->
+                        {% if user.is_authenticated %}
+
+                            <h2 class="card-title">Welcome back, {{ user.username }}!</h2>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                        {% else %}
+                            <h2 class="card-title">Welcome!</h2>
+                            <p class="fs-4">Discover new music, rate your favorite songs and albums, share your thoughts with a community of music lovers!</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <!--Recent Reviews-->
+                <div class="recent-reviews mt-4 ms-3">
+                    <h3>Recent Reviews</h3>
+
+                    <div class="card review-card">
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--Right Side Screen-->
+            <div class="col-6">
+
+                <div class="trending mt-4">
+                    <h3>Trending</h3>
+                </div>
+
+                <!--Albums-->
+                <div>
+                    <h4>Albums</h4>
+
+                    <!--Placeholder Images-->
+                    <div class="card-group albums-group">
+                        <div class="card">
+                            <img src="{% static 'images/deadbeat.jpg' %}" class="card-img-top" alt="Deadbeat - Tame Impala">
+                            <div class="card-body">
+                                <h5 class="card-title">Deadbeat</h5>
+                                <h6 class="card-subtitle">Tame Impala</h6>
+                                <p class="card-text">★ 3.5</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="{% static 'images/rumours.jpg' %}" class="card-img-top" alt="Rumours - Fleetwood Mac">
+                            <div class="card-body">
+                                <h5 class="card-title">Rumours</h5>
+                                <h6 class="card-subtitle">Fleetwood Mac</h6>
+                                <p class="card-text">★ 4.5</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="{% static 'images/juju.jpg' %}" class="card-img-top" alt="Ju Ju - Siouxsie and the Banshees">
+                            <div class="card-body">
+                                <h5 class="card-title">Juju</h5>
+                                <h6 class="card-subtitle">Siouxsie and the Banshees</h6>
+                                <p class="card-text">★ 4.0</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!--Songs-->
+                <div>
+                    <h4>Songs</h4>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</body>
+</html>

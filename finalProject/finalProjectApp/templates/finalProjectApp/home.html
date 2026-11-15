@@ -7,91 +7,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
     <title></title>
 
     <style>
-        body{
-
-            background-color: #000000;
+        body {
+            background-color: black;
             color: white;
             font-family: Arial, sans-serif;
-
+            margin: 0;
         }
 
-        .custom-navbar{
+        html, body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
 
+        .custom-navbar {
             background-color: #272727;
+            width: 100%;
+            margin: 0;
+            padding: 0;
         }
 
-        .navbar-search{
+        .navbar-search {
             width: 40%;
-
+          
         }
 
-        .navbar-dark .navbar-nav .nav-link:hover{
-
+        .navbar-nav .nav-link:hover {
             color: #9cd8ff;
-
         }
 
-        .btn-outline{
+        .btn-outline {
             color: #9cd8ff;
             border-color: #9cd8ff;
             white-space: nowrap;
         }
 
-        .btn-outline:hover{
-            background-color: #9cd8ff;
-            border-color: #9cd8ff;
-            color:#171b22;
-        }
+        .btn-outline:hover {
+                background-color: #9cd8ff;
+                border-color: #9cd8ff;
+                color: #171b22;
+         }
 
-        .welcome-card{
+        .welcome-card {
+            position: relative;
+            overflow: hidden;
             background-color: black;
-            color: white;
-            width: 80rem;
             height: 20rem;
             border-color: #9cd8ff;
+            box-shadow: 0 0 15px rgba(156, 216, 225, .35), 0 0 35px rgba(156, 216, 225, .25), 0 0 65px rgba(156, 216, 225, .15) !important;
+        }
+
+        .welcome-card .card-img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .welcome-overlay{
+            background: rgba(0,0,0,0.75);
+            color: white;
             border-radius: 15px;
-            max-width: 700px;
-            max-height: 650px;
-
-            box-shadow:
-                0 0 15px rgba(156, 216, 225, .35),
-                0 0 35px rgba(156, 216, 225, .25),
-                0 0 65px rgba(156, 216, 225, .15) !important;
-        }
-
-        .albums-group .card{
-            background-color: black;
+            padding: 2rem;
 
         }
+
+        .album-card {
+            background: transparent;
+            border: none !important;
+        }
+
+        .album-card .card-img-top{
+            border-radius: 18px !important;
+            display: block;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .album-card .card-body{
+            border: none !important;
+            background: transparent;
+        }
+
 
     </style>
 
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+    <nav class="navbar custom-navbar">
         <div class="container-fluid">
 
             <!--Site Name-->
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand ms-4 fw-bold" href="#">Harmony</a>
+
 
             <!--Middle Search & Button-->
             <form class="d-flex navbar-search position-absolute start-50 translate-middle-x">
                 <input class="form-control me-2 rounded-pill" type="search" placeholder="Search Music..." aria-label="Search">
-                <button class="btn btn-outline" type="submit">Search</button>
+                <button class="btn btn-outline fw-bold" type="submit">Search</button>
             </form>
 
             <!--Rightside Links-->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <div class="d-flex align-items-center ms-auto" id="navbarSupportedContent">
+                <ul class="navbar-nav flex-row mb-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
@@ -119,9 +141,9 @@
                 </ul>
 
                 {% if user.is_authenticated %}
-                    <button class="btn btn-outline ms-2" type="button">Logout</button>
+                    <button class="btn btn-outline ms-2 fw-bold" type="button">Logout</button>
                 {% else %}
-                    <button class="btn btn-outline ms-2" type="button">Sign Up</button>
+                    <button class="btn btn-outline ms-2 fw-bold" type="button">Sign Up</button>
                 {% endif %}
 
 
@@ -136,8 +158,9 @@
             <div class="col-6">
 
                 <!--Welcome Card-->
-                <div class="card welcome-card me-auto shadow-lg mt-4 ms-3">
-                    <div class="card-body">
+                <div class="card welcome-card me-auto shadow-lg mt-4 ms-3 theme-inverse">
+                    <img src="{% static 'images/banner.jpg' %}" class="card-img" alt="Banner Image">
+                    <div class="card-img-overlay welcome-overlay">
                         
                         <!--If Logged In-->
                         {% if user.is_authenticated %}
@@ -154,13 +177,13 @@
                 </div>
 
                 <!--Recent Reviews-->
-                <div class="recent-reviews mt-4 ms-3">
+                <div class="recent-reviews mt-7 ms-3">
                     <h3>Recent Reviews</h3>
 
-                    <div class="card review-card">
-
-
-
+                    <div class="card" style="max-width: 725px;">
+                        <div class="card-body">
+                            <h4 class="card-title">No reviews for now.</h4>
+                        </div>
                     </div>
 
                 </div>
@@ -178,30 +201,38 @@
                 <div>
                     <h4>Albums</h4>
 
-                    <!--Placeholder Images-->
-                    <div class="card-group albums-group">
-                        <div class="card">
-                            <img src="{% static 'images/deadbeat.jpg' %}" class="card-img-top" alt="Deadbeat - Tame Impala">
-                            <div class="card-body">
-                                <h5 class="card-title">Deadbeat</h5>
-                                <h6 class="card-subtitle">Tame Impala</h6>
-                                <p class="card-text">★ 3.5</p>
+                    <!--Placeholder Albums-->
+                    <div class="row">
+                        <div class="col-4 mb-3">
+                            <div class="card album-card">
+                                <img src="{% static 'images/deadbeat.jpg' %}" class="card-img-top" alt="Deadbeat - Tame Impala">
+                                <div class="card-body">
+                                    <h4 class="card-title">Deadbeat</h4>
+                                    <h6 class="card-subtitle">Tame Impala</h6>
+                                    <p class="card-text">★ 3.5</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <img src="{% static 'images/rumours.jpg' %}" class="card-img-top" alt="Rumours - Fleetwood Mac">
-                            <div class="card-body">
-                                <h5 class="card-title">Rumours</h5>
-                                <h6 class="card-subtitle">Fleetwood Mac</h6>
-                                <p class="card-text">★ 4.5</p>
+
+                        <div class="col-4 mb-3">
+                            <div class="card album-card">
+                                <img src="{% static 'images/rumours.jpg' %}" class="card-img-top" alt="Rumours - Fleetwood Mac">
+                                <div class="card-body">
+                                    <h4 class="card-title">Rumours</h4>
+                                    <h5 class="card-subtitle">Fleetwood Mac</h5>
+                                    <p class="card-text">★ 4.5</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <img src="{% static 'images/juju.jpg' %}" class="card-img-top" alt="Ju Ju - Siouxsie and the Banshees">
-                            <div class="card-body">
-                                <h5 class="card-title">Juju</h5>
-                                <h6 class="card-subtitle">Siouxsie and the Banshees</h6>
-                                <p class="card-text">★ 4.0</p>
+
+                        <div class="col-4 mb-3">
+                            <div class="card album-card">
+                                <img src="{% static 'images/details.jpg' %}" class="card-img-top" alt="Details - Frou Frou">
+                                <div class="card-body">
+                                    <h4 class="card-title">Details</h4>
+                                    <h5 class="card-subtitle">Frou Frou</h5>
+                                    <p class="card-text">★ 4.0</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -214,6 +245,12 @@
                     <h4>Songs</h4>
                 </div>
 
+                <!--Placeholder Songs-->
+                <div class="card" style="max-width: 725px;">
+                    <div class="card-body">
+                        <h4 class="card-title">No songs for now.</h4>
+                    </div>
+                </div>
             </div>
 
         </div>

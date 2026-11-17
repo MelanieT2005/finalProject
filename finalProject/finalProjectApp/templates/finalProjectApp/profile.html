@@ -4,149 +4,521 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ profile.user.username }}'s Profile</title>
+    <title>{{ profile.user.username }}'s Profile | Harmony</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
-            background-color: #171b22;
-            color: white;
+            background-color: #151922;
+            color: #f4f5f8;
             font-family: Arial, sans-serif;
         }
 
-        .profile-card {
-            background-color: #242b35;
-            border: none;
-            border-radius: 15px;
-            max-width: 650px;
+        .navbar {
+            background-color: #222731 !important;
+            border-bottom: 1px solid #343b48;
+        }
+
+        .btn-outline {
+            color: #a9d9ef;
+            border-color: #a9d9ef;
+            white-space: nowrap;
+        }
+
+        .btn-outline:hover {
+            background-color: #a9d9ef;
+            border-color: #a9d9ef;
+            color: #151922;
+        }
+
+        .profile-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 45px 20px 70px;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #283747, #202936);
+            border: 1px solid #394655;
+            border-radius: 18px;
+            padding: 35px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 45px;
         }
 
         .profile-icon {
-            width: 120px;
-            height: 120px;
-            background-color: #8ECAE6;
-            color: white;
-            font-size: 40px;
+            width: 125px;
+            height: 125px;
+            min-width: 125px;
+            background-color: #8ecae6;
+            color: #17212b;
+            font-size: 44px;
             font-weight: bold;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: auto;
             object-fit: cover;
         }
 
-        .bio-section {
-            background-color: #303945;
-            border-radius: 10px;
-            padding: 20px;
-            color: white;
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .profile-info h1 {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin: 18px 0;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            color: #a9d9ef;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #9ba6b5;
+            font-size: 12px;
+        }
+
+        .profile-bio {
+            color: #d0d5de;
+            line-height: 1.6;
+            margin-bottom: 0;
         }
 
         .edit-button {
-            background-color: #8ECAE6;
-            color: white;
+            background-color: #8ecae6;
+            color: #17212b;
             border: none;
-        }
-
-        .edit-button:hover {
-            background-color: #6BB8E8;
-            color: white;
-        }
-
-        .profile-card h1,
-        .profile-card p {
-            color: white !important;
-        }
-
-        .btn-outline {
-            color: #9cd8ff;
-            border-color: #9cd8ff;
+            border-radius: 8px;
+            padding: 10px 22px;
+            font-weight: 600;
             white-space: nowrap;
         }
 
-        .btn-outline:hover {
-            background-color: #9cd8ff;
-            border-color: #9cd8ff;
-            color: #171b22;
+        .edit-button:hover {
+            background-color: #b2e2f5;
+            color: #17212b;
         }
 
+        .profile-section {
+            margin-bottom: 48px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .album-card {
+            background-color: #222936;
+            border: 1px solid #343d4b;
+            border-radius: 12px;
+            padding: 12px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .album-card:hover {
+            transform: translateY(-4px);
+            border-color: #8ecae6;
+        }
+
+        .album-cover {
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        .cover-one {
+            background: linear-gradient(145deg, #536b80, #172b42);
+        }
+
+        .cover-two {
+            background: linear-gradient(145deg, #a66d70, #492d42);
+        }
+
+        .cover-three {
+            background: linear-gradient(145deg, #b18b57, #53402e);
+        }
+
+        .cover-four {
+            background: linear-gradient(145deg, #657b75, #273d3c);
+        }
+
+        .album-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 12px 0 4px;
+        }
+
+        .album-artist {
+            color: #9ba6b5;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .review-card {
+            background-color: #222936;
+            border: 1px solid #343d4b;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 16px;
+        }
+
+        .review-top {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 15px;
+        }
+
+        .review-cover {
+            width: 75px;
+            height: 75px;
+            min-width: 75px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 5px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .review-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .review-artist {
+            color: #9ba6b5;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .review-rating {
+            color: #a9d9ef;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .review-text {
+            color: #c5ccd6;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .view-more-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 22px;
+        }
+
+        .view-more-button {
+            color: #a9d9ef;
+            border: 1px solid #465366;
+            border-radius: 8px;
+            padding: 9px 24px;
+            font-size: 13px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .view-more-button:hover {
+            background-color: #a9d9ef;
+            color: #151922;
+            border-color: #a9d9ef;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                padding: 25px 15px 50px;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 28px 20px;
+            }
+
+            .profile-info h1 {
+                font-size: 25px;
+            }
+
+            .profile-stats {
+                justify-content: center;
+                gap: 25px;
+            }
+
+            .album-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 14px;
+            }
+
+            .section-heading h2 {
+                font-size: 19px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .album-grid {
+                gap: 10px;
+            }
+
+            .album-card {
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #272727;">
-    <div class="container-fluid">
+        <div class="container-fluid">
 
-        <a class="navbar-brand" href="{% url 'home' %}">Harmony</a>
+            <a class="navbar-brand" href="{% url 'home' %}">Harmony</a>
 
-        <div class="ms-auto d-flex align-items-center gap-3">
+            <div class="ms-auto d-flex align-items-center gap-3">
 
-            <a class="nav-link text-white" href="{% url 'home' %}">
-                Home
-            </a>
+                <a class="nav-link text-white" href="{% url 'home' %}">
+                    Home
+                </a>
 
-            {% if user.is_authenticated %}
-                <form method="POST" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button class="btn btn-outline" type="submit">
-                        Logout
-                    </button>
-                </form>
-            {% endif %}
-
-        </div>
-    </div>
-</nav>
-
-    <div class="container py-5">
-
-        <div class="card profile-card mx-auto shadow-lg">
-            <div class="card-body text-center p-5">
-
-                {% if profile.profile_picture %}
-                    <img
-                        src="{{ profile.profile_picture.url }}"
-                        alt="Profile picture"
-                        class="profile-icon mb-3"
-                    >
-                {% else %}
-                    <div class="profile-icon mb-3">
-                        {{ profile.user.username|first|upper }}
-                    </div>
-                {% endif %}
-
-                <h1 class="fw-bold text-white">
-                    {{ profile.user.username }}
-                </h1>
-
-                <p class="text-white">Music Listener</p>
-
-                <hr class="border-secondary my-4">
-
-                <div class="bio-section text-start">
-
-                    {% if profile.bio %}
-                        <p class="mb-0 text-white">{{ profile.bio }}</p>
-                    {% else %}
-                        <p class="text-white mb-0">
-                            This user has not added a bio yet.
-                        </p>
-                    {% endif %}
-                </div>
-
-                {% if request.user.is_authenticated and request.user == profile.user %}
-                    <a href="{% url 'edit_profile' profile.user.username %}"
-                       class="btn edit-button mt-4 px-4">
-                        Edit Profile
-                    </a>
+                {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'logout' %}" class="m-0">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline">
+                            Logout
+                        </button>
+                    </form>
                 {% endif %}
 
             </div>
         </div>
+    </nav>
 
-    </div>
+    <main class="profile-container">
+
+        <section class="profile-header">
+
+            {% if profile.profile_picture %}
+                <img
+                    src="{{ profile.profile_picture.url }}"
+                    alt="Profile picture"
+                    class="profile-icon"
+                >
+            {% else %}
+                <div class="profile-icon">
+                    {{ profile.user.username|first|upper }}
+                </div>
+            {% endif %}
+
+            <div class="profile-info">
+                <h1>{{ profile.user.username }}</h1>
+
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">128</span>
+                        <span class="stat-label">Followers</span>
+                    </div>
+
+                    <div class="stat-item">
+                        <span class="stat-number">86</span>
+                        <span class="stat-label">Following</span>
+                    </div>
+
+                    <div class="stat-item">
+                        <span class="stat-number">24</span>
+                        <span class="stat-label">Reviews</span>
+                    </div>
+                </div>
+
+                {% if profile.bio %}
+                    <p class="profile-bio">{{ profile.bio }}</p>
+                {% else %}
+                    <p class="profile-bio">
+                        This user has not added a bio yet.
+                    </p>
+                {% endif %}
+            </div>
+
+            {% if request.user.is_authenticated and request.user == profile.user %}
+                <a href="{% url 'edit_profile' profile.user.username %}"
+                   class="btn edit-button">
+                    Edit Profile
+                </a>
+            {% endif %}
+
+        </section>
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Most Loved Albums</h2>
+                </div>
+            </div>
+
+            <div class="album-grid">
+
+                <div class="album-card">
+                    <div class="album-cover cover-one">First<br>Album</div>
+                    <p class="album-title">First Album</p>
+                    <p class="album-artist">Artist Name</p>
+                </div>
+
+                <div class="album-card">
+                    <div class="album-cover cover-two">Second<br>Album</div>
+                    <p class="album-title">Second Album</p>
+                    <p class="album-artist">Artist Name</p>
+                </div>
+
+                <div class="album-card">
+                    <div class="album-cover cover-three">Third<br>Album</div>
+                    <p class="album-title">Third Album</p>
+                    <p class="album-artist">Artist Name</p>
+                </div>
+
+                <div class="album-card">
+                    <div class="album-cover cover-four">Fourth<br>Album</div>
+                    <p class="album-title">Fourth Album</p>
+                    <p class="album-artist">Artist Name</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Reviews</h2>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-top">
+                    <div class="review-cover cover-two">Second Album</div>
+
+                    <div>
+                        <h3 class="review-title">Second Album</h3>
+                        <p class="review-artist">Artist Name</p>
+                        <p class="review-rating">★★★★★ 5/5</p>
+                    </div>
+                </div>
+
+                <p class="review-text">
+                    An example of an album review.
+                </p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-top">
+                    <div class="review-cover cover-one">First Album</div>
+
+                    <div>
+                        <h3 class="review-title">First Album</h3>
+                        <p class="review-artist">Artist Name</p>
+                        <p class="review-rating">★★★★☆ 4/5</p>
+                    </div>
+                </div>
+
+                <p class="review-text">
+                    An example of an album review. 
+                </p>
+            </div>
+
+            <div class="view-more-container">
+                <a href="#" class="view-more-button">View All Reviews</a>
+            </div>
+
+        </section>
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Liked Albums</h2>
+                </div>
+            </div>
+
+            <div class="album-grid">
+
+                <div class="album-card">
+                    <div class="album-cover cover-four">Fourth<br>Album</div>
+                    <p class="album-title">Fourth Album</p>
+                    <p class="album-artist">Artist Name</p>
+                </div>
+
+                <div class="album-card">
+                    <div class="album-cover cover-three">Third<br>Album</div>
+                    <p class="album-title">Third Album</p>
+                    <p class="album-artist">Artist Name</p>
+                </div>
+
+                <div class="album-card">
+                    <div class="album-cover cover-two">Second<br>Album</div>
+                    <p class="album-title">Second Album</p>
+                    <p class="album-artist">Artist Name</p>
+                </div>
+
+                <div class="album-card">
+                    <div class="album-cover cover-one">First<br>Album</div>
+                    <p class="album-title">First Album</p>
+                    <p class="album-artist">Artist Name</p>
+                </div>
+
+            </div>
+
+            <div class="view-more-container">
+                <a href="#" class="view-more-button">View All Liked Albums</a>
+            </div>
+
+        </section>
+
+    </main>
 
 </body>
 </html>

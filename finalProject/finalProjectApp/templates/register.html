@@ -140,6 +140,11 @@
             justify-content: center;
             padding: 40px 15px;
         }
+
+        .navbar .navbar-brand {
+            color: white;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -148,7 +153,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #272727;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">
                 Harmony
             </a>
         </div>

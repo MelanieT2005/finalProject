@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Login | Harmony</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-color: #171b22;
+            color: white;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            position: relative;
+            isolation: isolate;
+            overflow-x: hidden;
+        }
+
+        /* Background glow */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(
+                    ellipse at 50% 45%,
+                    rgba(65, 145, 190, 0.16),
+                    transparent 55%
+                ),
+                radial-gradient(
+                    ellipse at 10% 15%,
+                    rgba(80, 150, 200, 0.08),
+                    transparent 40%
+                ),
+                radial-gradient(
+                    ellipse at 90% 85%,
+                    rgba(80, 150, 200, 0.07),
+                    transparent 40%
+                );
+        }
+
+        
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.35;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cg fill='none' stroke='%238ECAE6' stroke-width='1.5' opacity='.22'%3E%3Cpath d='M-100 420 Q100 250 300 420 T700 420 T1100 420 T1500 420'/%3E%3Cpath d='M-100 450 Q100 280 300 450 T700 450 T1100 450 T1500 450'/%3E%3Cpath d='M-100 480 Q100 310 300 480 T700 480 T1100 480 T1500 480'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .auth-card {
+            background-color: #242b35;
+            border: none;
+            border-radius: 15px;
+            max-width: 650px;
+            width: 100%;
+        }
+
+        .auth-form input {
+            background-color: #303945;
+            color: white;
+            border: 1px solid #46515e;
+            border-radius: 6px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .auth-form input:focus {
+            background-color: #303945;
+            color: white;
+            border-color: #8ECAE6;
+            box-shadow: 0 0 0 0.2rem rgba(142, 202, 230, 0.2);
+        }
+
+        .auth-form label {
+            color: white;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .auth-form p {
+            margin-bottom: 20px;
+        }
+
+        .auth-form .errorlist {
+            color: #ff9999;
+        }
+
+        .auth-button {
+            background-color: #8ECAE6;
+            color: white;
+            border: none;
+        }
+
+        .auth-button:hover {
+            background-color: #6BB8E8;
+            color: white;
+        }
+
+        .auth-card h1,
+        .auth-card p {
+            color: white !important;
+        }
+
+        .auth-link {
+            color: #8ECAE6;
+            text-decoration: none;
+        }
+
+        .auth-link:hover {
+            color: #6BB8E8;
+            text-decoration: underline;
+        }
+
+        .music-symbol {
+            color: #8ECAE6;
+            font-size: 22px;
+            letter-spacing: 5px;
+        }
+
+        .login-container {
+            min-height: calc(100vh - 56px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #272727;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                Harmony
+            </a>
+        </div>
+    </nav>
+
+    <!-- Login Card -->
+    <div class="container login-container">
+
+        <div class="card auth-card shadow-lg">
+            <div class="card-body p-5">
+
+                <div class="text-center mb-3">
+                    <div class="music-symbol">♪ ♫ ♪</div>
+                </div>
+
+                <h1 class="fw-bold text-center mb-2">
+                    Welcome Back
+                </h1>
+
+                <p class="text-center mb-4">
+                    Log in to your favorites, reviews, and fellow listeners.
+                </p>
+
+                <form method="POST" class="auth-form">
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn auth-button px-4">
+                            Login
+                        </button>
+                    </div>
+                </form>
+
+                <hr class="border-secondary my-4">
+
+                <p class="text-center mb-0">
+                    Don't have an account?
+                    <a href="{% url 'register' %}" class="auth-link">
+                        Register here
+                    </a>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
